@@ -53,6 +53,6 @@ Paste an `id` from the list. Then try it again with an id that doesn't exist —
 GUID. Predict each one first. The second may not do what you expect.
 
 ```http
-GET {{host}}/shows/00000000-0000-0000-0000-000000000000
+GET {{host}}/shows/8debec2e-ab6b-4292-8ffe-43d065a6d864
 Accept: application/json
 ```
