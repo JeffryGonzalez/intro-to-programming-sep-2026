@@ -16,6 +16,8 @@ public class ShowsData(IDocumentSession session) : IProvideShowsData
 
     public async Task<ShowDetails?> GetShowByIdAsync(Guid id)
     {
+        // .NET (actually, Marten) turns this into a Postgres SQL Query and runs it against the database.
+
         return await session.Query<ShowEntity>()
             .Where(s => s.Id == id)
             .Select(s => new ShowDetails(s.Id, s.Title, s.Genre, s.Added))

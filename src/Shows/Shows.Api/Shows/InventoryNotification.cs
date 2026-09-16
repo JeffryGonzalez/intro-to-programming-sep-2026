@@ -11,6 +11,8 @@ public class InventoryNotification(HttpClient client) : INotifyInventoryControl
 {
     public async Task NotifyNewShowAsync(ShowSummary show)
     {
-        await client.PostAsJsonAsync("/notifications", new { show.Id, show.Title });
+        
+        var response = await client.PostAsJsonAsync("/notifications", new { show.Id, show.Title });
+        response.EnsureSuccessStatusCode(); // blow up if the status code is  not 200-299
     }
 }

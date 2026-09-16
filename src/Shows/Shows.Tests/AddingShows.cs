@@ -9,8 +9,11 @@ public class AddingShows(ShowsApiFixture fixture) : IClassFixture<ShowsApiFixtur
     [Fact]
     public async Task AddedShowShowsUpInTheList()
     {
-        var newShow = new { title = "Twin Peaks: The Return", genre = "Drama" };
+       var newShow = new { title = "Twin Peaks: The Return", genre = "Drama" };
+       // var newShow = new ShowCreateRequest { Name = "Twin Peaks: The Return", Genre = "Drama" };
 
+        // This is NOT a Unit test, because it IS hitting the network, using a database, etc.
+        // This is either a System Test, or a Unit Integration Test (I'll explain the difference later)
         await fixture.Host.Scenario(api =>
         {
             api.Post.Json(newShow).ToUrl("/shows");

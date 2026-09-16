@@ -19,4 +19,6 @@ public record ShowCreateRequest
 
     [MaxLength(40)]
     public string? Genre { get; init; }
+
+
 }

@@ -13,7 +13,7 @@ public class OpeningBalance
         var account = new BankAccount(); // replace X with actual namespace
         decimal expectedBalance = 5000;
 
-        decimal actualBalance = account.GetBalance();
+        decimal actualBalance = account.GetBalance().Amount;
 
         Assert.Equal(expectedBalance, actualBalance);
     }
