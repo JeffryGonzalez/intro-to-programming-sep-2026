@@ -5,15 +5,21 @@
 // Primitive obsession - marten fowler code smell
 
 // maintains the balance. 
-public class BankAccount
+
+
+
+public class BankAccount(IProvideBonusesForBankAccountDeposits bonusCalculator)
 {
     // "fields"
     private decimal _currentBalance = 5000;
-    public void Deposit(TransactionAmount amountToDeposit)
+    public virtual void Deposit(TransactionAmount amountToDeposit)
     {
-      
-        _currentBalance += amountToDeposit;
+    
+        decimal bonus = bonusCalculator.CalculateBonusFor(_currentBalance, amountToDeposit);
+
+        _currentBalance += amountToDeposit + bonus;
     }
+
 
 
     public AccountStatement GetBalance()
@@ -25,9 +31,10 @@ public class BankAccount
     public void Withdraw(TransactionAmount withdrawalAmount)
     {
       
+        // if the amount <= throw
         if (_currentBalance - withdrawalAmount < 0)
         {
-            throw new OverdraftException();
+            throw new OverdraftException(); // different than common expectation    
         }
         else
         {

@@ -1,4 +1,5 @@
 ﻿using Banking.Domain;
+using Banking.Tests.TestDoubles;
 
 namespace Banking.Tests.Account;
 
@@ -10,7 +11,7 @@ public class OpeningBalance
     [Fact]
     public void IsCorrect()
     {
-        var account = new BankAccount(); // replace X with actual namespace
+        var account = new BankAccount(new DummyBonusCalculator()); // replace X with actual namespace
         decimal expectedBalance = 5000;
 
         decimal actualBalance = account.GetBalance().Amount;

@@ -36,7 +36,7 @@ public class ShowsData(IDocumentSession session) : IProvideShowsData
 
         session.Store(entity);
         await session.SaveChangesAsync();
-
+        // insert into Table values (...)
         return new ShowDetails(entity.Id, entity.Title, entity.Genre, entity.Added);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Banking.Domain;
+using Banking.Tests.TestDoubles;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,7 +28,7 @@ public class TransactionAmountTests
     [Fact]
     public void Watermelon()
     {
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
 
         var statement = account.GetBalance();
         Assert.Equal(5000, statement.Amount);
@@ -35,4 +36,5 @@ public class TransactionAmountTests
             TimeSpan.FromMilliseconds(500));
 
     }
+
 }

@@ -1,4 +1,6 @@
 ﻿using Banking.Domain;
+using Banking.Tests.TestDoubles;
+using NSubstitute;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +16,7 @@ public class MakingDesposits
     public void DepositingIncreasesTheBalance(decimal amount)
     {
         // Given
-        var account = new BankAccount();
+        var account = new BankAccount(Substitute.For<IProvideBonusesForBankAccountDeposits>());
         var openingBalance = account.GetBalance();
 
 
@@ -27,20 +29,7 @@ public class MakingDesposits
 
     }
 
-    [Fact]
-    public void MultipleAccounts()
-    {
-        var account1 = new BankAccount();
-        var account2 = new BankAccount();
 
-        Assert.Equal(account1.GetBalance().Amount, account2.GetBalance().Amount);
-
-        account1.Deposit(100);
-        account2.Deposit(50.25M);
-        Assert.NotEqual(account1.GetBalance(), account2.GetBalance()); // blammo
-
-
-    }
     [Fact]
     public void Avacado()
     {

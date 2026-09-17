@@ -1,5 +1,6 @@
 ﻿
 using Banking.Domain;
+using Banking.Tests.TestDoubles;
 
 namespace Banking.Tests.Account;
 
@@ -9,7 +10,7 @@ public class MakingWithdrawals
     [Fact]
     public void MakingAWithdrawalLowersTheBalance()
     {
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
         var openingBalance = account.GetBalance();
         var amountToWithdraw = 100.25M;
 
@@ -22,7 +23,7 @@ public class MakingWithdrawals
     [Fact]
     public void OnOverdraftBalanceIsRetained()
     {
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
         var openingBalance = account.GetBalance();
         var amountToWithdraw = 1;
 
@@ -45,11 +46,10 @@ public class MakingWithdrawals
     [Fact]
     public void OnOverdraftAnExceptionIsThrown()
     {
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
 
 
-        Assert.Throws<OverdraftException>(() =>
-        account.Withdraw(account.GetBalance().Amount + .01M)
+        Assert.Throws<OverdraftException>(() => account.Withdraw(account.GetBalance().Amount + .01M)
     );
 
 
@@ -59,7 +59,7 @@ public class MakingWithdrawals
     public void CanWithdrawFullBalance()
     {
 
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
 
         account.Withdraw(account.GetBalance().Amount);
 
@@ -71,7 +71,7 @@ public class MakingWithdrawals
     [InlineData(-1)]
     public void InvalidAmounts(decimal amount)
     {
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
         var openingBalance = account.GetBalance();
  
 
