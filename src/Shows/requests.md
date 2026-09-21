@@ -28,8 +28,8 @@ POST {{host}}/shows
 Content-Type: application/json
 
 {
-  "title": "MASH",
-  "genre": "Drama"
+  "title": "Gravity Falls",
+  "genre": "Horror"
 }
 ```
 
@@ -53,6 +53,6 @@ Paste an `id` from the list. Then try it again with an id that doesn't exist —
 GUID. Predict each one first. The second may not do what you expect.
 
 ```http
-GET {{host}}/shows/2c7166e5-c5c6-42bf-99c5-f004ab4f1c37
+GET {{host}}/shows/a56cf02e-36b8-4ca9-bdb4-c130c4f53966
 Accept: application/json
 ```

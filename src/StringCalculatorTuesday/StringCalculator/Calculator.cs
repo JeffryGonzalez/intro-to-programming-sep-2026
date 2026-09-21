@@ -8,8 +8,5 @@ public class Calculator
 
     }
 
-    public string Add(int numbers)
-    {
-        return numbers.ToString();
-    }
+ 
 }

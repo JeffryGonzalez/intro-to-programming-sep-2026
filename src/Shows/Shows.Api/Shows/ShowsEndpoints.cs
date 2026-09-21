@@ -28,7 +28,7 @@ public static class ShowsEndpoints
 
             try
             {
-                await notifier.NotifyNewShowAsync(new ShowSummary(created.Id, created.Title));
+               await notifier.NotifyNewShowAsync(new ShowSummary(created.Id, created.Title));
             }
             catch (Exception ex)
             {

@@ -6,20 +6,14 @@ public class CalculatorTests
 {
 
     private Calculator calculator = new Calculator();
-    //public CalculatorTests()
-    //{
-    //    calculator = new Calculator();
-    //}
+
 
     [Fact]
     public void EmptyStringReturnsZero()
     {
 
-
-
         var result = calculator.Add("");
         calculator.Add("1,2");
-        calculator.Add(99);
 
         Assert.Equal(0, result);
     }
