@@ -28,3 +28,11 @@ Angular: 22.1.0
 - Fetch latest from source code control
 - If anything in package.json or package-lock.json changed:
     - run `npm ci` (Clean Install)
+
+
+## Angular - Experimental and Semver
+
+- Angular team will add new stuff and not increment semver sometimes.
+- They will either put "experimental" in the name, or will mark it otherwise as experimental.
+- An example - Signals were *experimental* for a few versions before they became "stable"
+    - They used to have a method called `mutate`, they changed it to `update`, stuff like that.

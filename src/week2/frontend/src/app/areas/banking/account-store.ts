@@ -1,7 +1,9 @@
-import { computed } from '@angular/core';
+import { computed, effect } from '@angular/core';
+import { sanitizeConfig, withStellarDevtools } from '@hypertheory-labs/stellar-ng-devtools';
 import {
   patchState,
   signalStore,
+  watchState,
   withComputed,
   withHooks,
   withMethods,
@@ -9,9 +11,20 @@ import {
 } from '@ngrx/signals';
 
 export const AccountStore = signalStore(
+  withStellarDevtools('AccountStore', {
+    description:
+      'This store holds bank account information, and allows for deposits and withdrawals',
+    sourceHint: '/src/app/areas/banking/account-store.ts',
+    sanitize: sanitizeConfig<{ sessionToken: string }>({
+      sessionToken: 'token',
+    }),
+  }),
   withState({
     currentBalance: 5000,
     txAmount: 0,
+    email: 'jeff@hypertheory.com',
+    ssn: '555-55-5555',
+    sessionToken: '93898983',
   }),
   withMethods((store) => {
     return {
@@ -33,9 +46,19 @@ export const AccountStore = signalStore(
   }),
   withHooks({
     onInit(store) {
-      console.log('The AccountStore Has Been Created');
+      // GET from an API
+      const savedBalance = localStorage.getItem('account-balance');
+      if (savedBalance) {
+        const balance = JSON.parse(savedBalance) as unknown as number;
+        patchState(store, { currentBalance: balance });
+      }
+      watchState(store, (state) => {
+        //console.log(state);
+        // post to an API?
+        localStorage.setItem('account-balance', JSON.stringify(state.currentBalance));
+      });
     },
-    onDestroy(store) {
+    onDestroy() {
       console.log('The AccountStore has been destroyed!');
     },
   }),
