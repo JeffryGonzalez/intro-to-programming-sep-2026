@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Account } from './account';
+import { AccountStore } from './account-store';
 
 @Component({
   selector: 'app-banking-deposit',
@@ -19,5 +19,5 @@ import { Account } from './account';
   styles: ``,
 })
 export class Deposit {
-  protected readonly service = inject(Account);
+  protected readonly service = inject(AccountStore);
 }

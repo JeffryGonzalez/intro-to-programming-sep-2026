@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home';
-import { Account } from './areas/banking/account';
 
 export const routes: Routes = [
   {

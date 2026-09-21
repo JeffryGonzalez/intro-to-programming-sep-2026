@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { RouterLinkWithHref } from '@angular/router';
-import { Account } from './account';
 import { CurrencyPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { RouterLinkWithHref, RouterOutlet } from '@angular/router';
+import { AccountStore } from './account-store';
 
 @Component({
   selector: 'app-banking-home',
@@ -14,7 +13,7 @@ import { CurrencyPipe } from '@angular/common';
       <li><a routerLink="withdraw">Withdraw</a></li>
     </ul>
     <div>
-      <p>Your Balance is {{ account.balance() | currency }}</p>
+      <p>Your Balance is {{ account.currentBalance() | currency }}</p>
     </div>
     <div class="m-4 p-2">
       <router-outlet />
@@ -23,5 +22,5 @@ import { CurrencyPipe } from '@angular/common';
   styles: ``,
 })
 export class Home {
-  protected readonly account = inject(Account);
+  protected readonly account = inject(AccountStore);
 }
