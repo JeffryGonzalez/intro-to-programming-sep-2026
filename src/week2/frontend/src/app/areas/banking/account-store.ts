@@ -46,9 +46,11 @@ export const AccountStore = signalStore(
   }),
   withHooks({
     onInit(store) {
+      // The first time an instance of this service is injected() into something.
       // GET from an API
+      console.log('Created the AccountStore');
       const savedBalance = localStorage.getItem('account-balance');
-      if (savedBalance) {
+      if (savedBalance && savedBalance !== 'null') {
         const balance = JSON.parse(savedBalance) as unknown as number;
         patchState(store, { currentBalance: balance });
       }
@@ -59,6 +61,7 @@ export const AccountStore = signalStore(
       });
     },
     onDestroy() {
+      // when the service is destroyed - the "owner" of that service (the thing that provides it) is gone.
       console.log('The AccountStore has been destroyed!');
     },
   }),

@@ -11,6 +11,11 @@ export const routes: Routes = [
     loadChildren: () => import('./areas/banking/banking-routes').then((r) => r.bankingRoutes),
   },
   {
+    path: 'parking-lot',
+    loadChildren: () =>
+      import('./areas/parking-lot/parking-lot-routes').then((r) => r.parkingLotRoutes),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },
