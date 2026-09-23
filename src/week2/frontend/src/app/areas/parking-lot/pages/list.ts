@@ -26,7 +26,7 @@ import { ParkingLotStore } from '../stores/parking-lot';
       <span class="loading loading-spinner text-error"></span>
     } @else {
       <app-parking-lot-list-sort />
-      <p>Jeffry</p>
+
       <ul class="p-4 bg-base-200">
         @for (item of store.sortedList(); track item.id) {
           <li class="collapse collapse-arrow bg-base-100 border border-base-300 mb-4">

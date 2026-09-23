@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
   styles: ``,
 })
 export class Counter {
-  current = 0;
+  current = 1;
 
   increment() {
     this.current += 1;

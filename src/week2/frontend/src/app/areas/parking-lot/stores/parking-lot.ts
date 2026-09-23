@@ -2,6 +2,7 @@ import {
   patchState,
   signalStore,
   withComputed,
+  withHooks,
   withMethods,
   withProps,
   withState,
@@ -10,6 +11,7 @@ import { ParkingLotItem } from '../types';
 import { withStellarDevtools } from '@hypertheory-labs/stellar-ng-devtools';
 import { httpResource } from '@angular/common/http';
 import { computed } from '@angular/core';
+import { ParkingLotItemCreate } from '../pages/add';
 
 type SortableColumns = Pick<ParkingLotItem, 'title' | 'created'>;
 
@@ -32,6 +34,16 @@ export const ParkingLotStore = signalStore(
   }),
   withMethods((store) => {
     return {
+      addParkingLotItem: async (item: ParkingLotItemCreate) => {
+        await fetch('/api/parking-lot', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(item),
+        });
+        store.itemsResource.reload();
+      },
       toggle: (by: SortColumns) => {
         if (store.column() === by) {
           const newVal = store.direction() === 'Asc' ? 'Desc' : 'Asc';
@@ -86,5 +98,12 @@ export const ParkingLotStore = signalStore(
         }
       }),
     };
+  }),
+  withHooks({
+    onInit(store) {
+      // setInterval(() => {
+      //   store.itemsResource.reload();
+      // }, 10000)
+    },
   }),
 );
