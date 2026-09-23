@@ -7,6 +7,7 @@ var pgServer = builder.AddPostgres("pg-server")
 
 var parkingLotDatabase = pgServer.AddDatabase("parking-lot");
 
+builder.AddExternalService("ng", "http://localhost:4200");
 var scalar = builder.AddScalarApiReference(options =>
 {
     options.PreferHttpsEndpoint = true;
