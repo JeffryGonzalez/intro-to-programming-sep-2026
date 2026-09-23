@@ -25,4 +25,11 @@ var frontend = builder.AddViteApp("frontend", "../../../frontend", "start")
 
 scalar.WithApiReference(api);
 
+builder.AddProject<Projects.Gateway>("gateway")
+    .WithReference(api)
+    .WithReference(frontend)
+    .WaitFor(api)
+    .WaitFor(frontend)
+    .WithExternalHttpEndpoints();
+
 builder.Build().Run();

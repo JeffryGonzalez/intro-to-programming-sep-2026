@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Gateway\Gateway.csproj" />
     <ProjectReference Include="..\ParkingLot.Api\ParkingLot.Api.csproj" />
   </ItemGroup>
 
