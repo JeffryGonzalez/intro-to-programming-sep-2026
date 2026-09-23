@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router';
 import { Home } from './home';
+import { Add } from './pages/add';
 import { Details } from './pages/details';
 import { List } from './pages/list';
-import { Add } from './pages/add';
 import { ParkingLotStore } from './stores/parking-lot';
-import { List2 } from './pages/list-two';
 
 export const parkingLotRoutes: Routes = [
   {

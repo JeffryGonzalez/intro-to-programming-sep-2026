@@ -1,12 +1,10 @@
-import { DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ParkingLotStore } from '../stores/parking-lot';
 import { ListSort } from '../widgets/list-sort';
 
 @Component({
   selector: 'app-parking-lot-list',
-  imports: [DatePipe, RouterLink, ListSort],
+  imports: [ListSort],
   template: `
     @if (store.itemsResource.error()) {
       <div class="alert alert-warning">
