@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { AccountStore } from '../account-store';
 
 @Component({
@@ -18,8 +18,8 @@ import { AccountStore } from '../account-store';
         />
       </label>
       <button
-        [disabled]="service.wouldOverdraft()"
-        (click)="doTransaction(amt.valueAsNumber)"
+        [disabled]="disableButton()"
+        (click)="doTransaction(amt.valueAsNumber, amt)"
         class="btn btn-secondary"
       >
         Perform {{ transactionType() }}
@@ -32,11 +32,16 @@ export class TxInput {
   transactionType = input.required<'Deposit' | 'Withdraw'>();
   protected readonly service = inject(AccountStore);
 
-  doTransaction(amount: number) {
+  disableButton = computed(
+    () => this.transactionType() === 'Withdraw' && this.service.wouldOverdraft(),
+  );
+  doTransaction(amount: number, el: HTMLInputElement) {
     if (this.transactionType() === 'Deposit') {
       this.service.deposit(amount);
     } else {
       this.service.withdraw(amount);
     }
+    el.value = '';
+    el.focus();
   }
 }
