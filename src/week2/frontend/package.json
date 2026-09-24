@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "gen-types": "openapi-ts",
-    "test:dev": "vitest --ui",
+    "test:dev": "ng test --ui",
     "lint": "ng lint",
     "lens:init": "msw-lens --init",
     "lens": "msw-lens",
