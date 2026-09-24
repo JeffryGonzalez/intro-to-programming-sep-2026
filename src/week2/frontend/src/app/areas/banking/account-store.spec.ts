@@ -8,6 +8,9 @@ import { StandardBonusCalculator } from './standard-bonus-calculator';
 //   },
 // };
 describe('The Bank Store', () => {
+  it.skip('Opening Balance is Correct');
+  it.skip('Can do withdrawals');
+
   it('has an initial balance', () => {
     TestBed.configureTestingModule({
       providers: [
