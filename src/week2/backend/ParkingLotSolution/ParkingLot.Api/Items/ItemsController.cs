@@ -108,7 +108,7 @@ public record ParkingLotDetailsItem
 
 public record ParkingLotCreateItem
 {
-    [Required, MinLength(3), MaxLength(100)]
+    [Required, MinLength(5), MaxLength(100)]
     public string Title { get; set; } = string.Empty;
     [MaxLength(500)]
     public string Description { get; set; } = string.Empty;
@@ -122,6 +122,7 @@ public class ParkingLotEntity
     public string Description { get; set; } = string.Empty;
     public DateTimeOffset Created { get; set; }
     public IReadOnlyList<Note> Notes { get; set; }= new List<Note>();
+    //public bool MarkedAsLearned { get; set; } = false;
 
 }
 
