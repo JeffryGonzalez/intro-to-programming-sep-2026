@@ -29,7 +29,15 @@ import { ParkingLotDetailItem } from '../types';
             <p class="font-sans">
               {{ note.added | date: 'longDate' }} at {{ note.added | date: 'shortTime' }}
               @if (note.temp) {
-                <span class="font-bold text-red-400">Pending Save...</span>
+                <span class="font-bold text-red-400">Pending...</span>
+              } @else {
+                <button
+                  (click)="remove(note.id)"
+                  type="button"
+                  class="btn btn-circle btn-error btn-sm"
+                >
+                  X
+                </button>
               }
             </p>
           </div>
@@ -39,7 +47,7 @@ import { ParkingLotDetailItem } from '../types';
     <form [formRoot]="form">
       <label class="label">
         Content of new note:
-        <input [formField]="form.content" type="text" />
+        <input class="input input-lg input-accent" [formField]="form.content" type="text" />
       </label>
       <button type="submit" class="btn btn-sm btn-primary">Add Note</button>
     </form>
@@ -54,6 +62,9 @@ export class Details {
   model = signal<{ content: string }>({
     content: '',
   });
+  async remove(noteId: string) {
+    await this.store.deleteNote(noteId, this.id());
+  }
 
   form = form(
     this.model,
@@ -63,7 +74,9 @@ export class Details {
     {
       submission: {
         action: async () => {
-          this.store.addNote(this.form().value());
+          this.store.addNote(this.form().value(), this.id());
+          this.model.update(() => ({ content: '' }));
+          this.form().reset();
         },
       },
     },
@@ -80,22 +93,4 @@ export class Details {
       }
     });
   }
-
-  //   id: '99',
-  //   title: 'Macrame',
-  //   created: '2026-09-22T18:32:27.025Z',
-  //   description: 'Always wanted to learn to make those hippy planters',
-  //   notes: [
-  //     {
-  //       id: '1',
-  //       content: 'These are cool',
-  //       added: '2026-09-22T14:32:27.025Z',
-  //     },
-  //     {
-  //       id: '2',
-  //       content: 'A list of good knots https://hobbii.com/blogs/news/macrame-knots-for-beginners',
-  //       added: '2026-09-22T14:32:27.025Z',
-  //     },
-  //   ],
-  // });
 }
