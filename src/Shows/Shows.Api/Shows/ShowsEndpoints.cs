@@ -28,6 +28,9 @@ public static class ShowsEndpoints
 
             try
             {
+                // this is a technical requirement - because the "business does not care".
+                // string calcultor part 2 - this is logging.
+                // - and if that fails, calling a web service.
                await notifier.NotifyNewShowAsync(new ShowSummary(created.Id, created.Title));
             }
             catch (Exception ex)
