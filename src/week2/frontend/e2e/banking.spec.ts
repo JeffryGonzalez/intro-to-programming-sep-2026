@@ -22,8 +22,10 @@ test.describe('Banking', () => {
 
     const txButton = page.getByRole('button', { name: 'Perform Deposit' });
 
+    // get the content of balance el before
     await txButton.click();
     await expect(balanceEl).toContainText('$5,110.00');
+    // see if it chantged.
 
     // const balanceText = page.getByText('Your Balance is');
 

@@ -16,6 +16,7 @@ public class ItemsController(IDocumentSession session) : ControllerBase
         CancellationToken token
     )
     {
+        await Task.Delay(2000);
         var entity = await session.LoadAsync<ParkingLotEntity>(id, token);
         if(entity is null)
         {
@@ -24,7 +25,7 @@ public class ItemsController(IDocumentSession session) : ControllerBase
         var noteToDelete = entity.Notes.FirstOrDefault(n => n.Id == noteId);
         if(noteToDelete is null)
         {
-            return NotFound();
+            return NoContent();
         }
         entity.Notes = [.. entity.Notes.Where(n => n.Id != noteId)];
         session.Store(entity);
@@ -40,6 +41,7 @@ public class ItemsController(IDocumentSession session) : ControllerBase
         CancellationToken token
         )
     {
+        await Task.Delay(2000);
         var entity = await session.LoadAsync<ParkingLotEntity>(id, token);
         if(entity is null)
         {
